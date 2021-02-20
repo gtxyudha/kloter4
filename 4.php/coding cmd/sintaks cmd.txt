@@ -1,0 +1,58 @@
+create database kloter4;
+
+use kloter4;
+
+CREATE TABLE customer (
+id int (10) auto_increment,
+name varchar (30),
+email varchar (30),
+address varchar (50),
+cars_id int (10),
+quantity int (10),
+primary key (id),
+foreign key (cars_id) references cars(id)
+);
+
+CREATE TABLE brand (
+id int (10) auto_increment,
+name varchar (30),
+primary key (id)
+);
+
+CREATE TABLE cars (
+id int (10) auto_increment,
+name varchar (30),
+brand_id int(10),
+image varchar(255),
+color varchar (30),
+description varchar (100),
+create_time datetime,
+update_time datetime,
+stock int (10),
+primary key (id),
+foreign key (brand_id) references brand (id)
+);
+
+
+insert into brand (name) values ("Toyota");
+insert into brand (name) values ("Honda");
+insert into brand (name) values ("Mitsubishi");
+insert into brand (name) values ("SUzuki");
+
+insert into brand (name) values ("Daihatsu");
+
+insert into cars values (1, "Toyota Yaris", 1, "imageToyota", "Yellow", "Harga Rp 300juta", now(), "", 50);
+insert into cars values (2, "Honda Jazz", 2, "imageHonda", "Black", "Harga Rp 319juta", now(), "", 20);
+insert into cars values (3, "Mitsubishi Expander", 3, "imageMitsubishi", "Silver", "Harga Rp 270juta", now(), "", 80);
+insert into cars values (4, "Suzuki Ertiga", 4, "imageSuzuki", "White", "Harga Rp 240juta", now(), "", 40);
+
+insert into cars values (9, "Daihatsu Sirion", 6, "daihatsusirion.PNG", "Blue", "Harga Rp 200juta", now(), "", 55);
+
+
+select * from cars;
+select * from cars, customer where customer.cars_id=2 and cars.id=2;
+select cars.*, brand.* from cars INNER JOIN brand ON cars.brand_id=brand.id where brand.name='Toyota';
+
+insert into customer (name,email, address, cars_id, quantity) values ("Rizal", "rizal@gmail.com", "Bandung", 6, 1);
+
+
